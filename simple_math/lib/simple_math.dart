@@ -1,15 +1,16 @@
-import 'package:math_expressions/math_expressions.dart';
+import 'package:simple_math/simple_parser.dart';
 
 class SimpleMath {
-  String _expression;
+  final String _expression;
 
   SimpleMath(this._expression);
 
-  double decide() {
-    Parser parser = Parser();
-    ContextModel context = ContextModel();
-    Expression exp = parser.parse(_expression);
-
-    return exp.evaluate(EvaluationType.REAL, context);
+  double decide([Map<String, double> vars = const {}]) {
+    try {
+      final parser = SimpleParser(_expression, vars);
+      return parser.evaluate();
+    } catch (e) {
+      throw ArgumentError('Invalid expression: $_expression');
+    }
   }
 }

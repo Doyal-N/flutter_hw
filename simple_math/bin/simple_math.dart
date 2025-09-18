@@ -1,6 +1,11 @@
-import 'package:simple_math/simple_math.dart';
+import 'package:simple_math/simple_parser.dart';
 
 void main(List<String> arguments) {
-  var expr = SimpleMath(arguments[0]);
-  print(expr.decide());
+  try {
+    final parser = SimpleParser('-2+3*4', {});
+    final result = parser.evaluate();
+    print('Result: $result');
+  } catch (e) {
+    print('Error: $e');
+  }
 }
